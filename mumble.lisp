@@ -235,22 +235,54 @@
     (COND (SAY-PROG (funcall SAY-PROG))
           (T (warn "Can't say ~S in English." *cd*)))))
 
+(defun remove-numbers (with-numbers)
+  (let ((without-numbers
+	    (remove-if
+	     (lambda (c)
+	       (or (equal c #\0)
+		   (equal c #\1)
+		   (equal c #\2)
+		   (equal c #\3)
+		   (equal c #\4)
+		   (equal c #\5)
+		   (equal c #\6)
+		   (equal c #\7)
+		   (equal c #\8)
+		   (equal c #\9)))
+	     (string with-numbers))))
+    (intern (format? nil "~a" without-numbers))))
+
+(defun remove-dashes (with-dashes)
+  (let ((without-dashes (substitute #\Space #\- (string with-dashes))))
+    (intern (format? nil "~a" without-dashes))))
+
 ;;; Had to remove the capitalization handling code because of a bug introduced
 ;;; by Genera 8. Richard is sending a bug report. [1mar94]
 ;;; 
 (defun say-word (x)
   (if (eq x '?unspec) (setq x 'something)) ;Just in case ...
-  (cond (*first-word-in-sentence?*
-          (format? *tspin-stream* "~<~% ~4,72:;~@(~A~)~>" x))
+
+  ;;; TO-DO: fix grammar now that dashes and numbers are removed, add that before components and objects?
+
+  (let* ((x (if (or (find x *objects*) (find x *all-locations*) (equal 'officer1 x))
+		(remove-dashes (remove-numbers x))
+	        x))
+         (x (if (find x *components*)
+                (intern (format? nil "the ~a" (remove-dashes (remove-numbers x))))
+                x)))
+
+    (cond (*first-word-in-sentence?*
+           (format? *tspin-stream* "~<~% ~4,72:;~@(~A~)~>" x))
 ;;;           (format? say-stream "~<~% ~4,72:;~A~>" x))	
-        ((or (get x 'proper-name)
-             (member x *first-person-singular-words*))
-          (format? *tspin-stream* "~<~%~4,72:; ~@(~A~)~>" x))
+          ((or (get x 'proper-name)
+               (member x *first-person-singular-words*))
+           (format? *tspin-stream* "~<~%~4,72:; ~@(~A~)~>" x))
 ;;;           (format? say-stream "~<~%~4,72:; ~A~>" x))
-        (t
-  	 (format? *tspin-stream* "~<~%~4,72:; ~(~A~)~>" x)
+          (t
+  	   (format? *tspin-stream* "~<~%~4,72:; ~(~A~)~>" x)
 ;;;  	 (format? say-stream "~<~%~4,72:; ~A~>" x)
-	 ))
+	   )))
+
   (setq *first-word-in-sentence?* nil))
 
 (DEFun SUBCLAUSE (WORD cd TENSE)

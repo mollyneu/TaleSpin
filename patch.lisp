@@ -62,7 +62,7 @@
     (if 
       (and (not (numberp problem-num))		;[cox 18aug93]
 	   (not *auto?*))
-      (format *tspin-stream* "~%What is ~@(~A~)'s problem?~%" main-character))
+      (format *tspin-stream* "~%What is ~@(~A~)'s problem?~%" (remove-numbers main-character)))
     (let* ((*him* (if (eq g 'male) main-character nil))
            (*her* (if (eq g 'female) main-character nil))
            (problem-index
@@ -97,9 +97,9 @@
 ;     (setq *goals* *real-goals*)
       (setq say-stream *terminal-io*)
       (setq *story-cds* (list (time-marker)))
-      (do-break spin "Problem: ~s~%Main-Character: ~s~%" problem main-character)
+      (do-break spin "Problem: ~s~%Main-Character: ~s~%" problem (remove-numbers main-character))
       (format? *tspin-stream* "~%~%One day ...~s was ~s.~%"
-	       main-character problem)
+	       (remove-numbers main-character) problem)
       (init-gen)
       (if test-cd
 	  (assert-fact test-cd)
