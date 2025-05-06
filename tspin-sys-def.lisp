@@ -54,7 +54,7 @@
 
 
 (defparameter *tspin-file-dir*
-    "c:/Users/micha/Google Drive/Code/TaleSpin/"
+  (directory-namestring (merge-pathnames  "TaleSpin/" (user-homedir-pathname)))
   "The path to the directory where the TaleSpin system resides.")
 
 

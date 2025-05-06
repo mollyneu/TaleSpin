@@ -866,7 +866,7 @@
                           &key from-end test test-not start end count key)
     (declare (ignore from-end test test-not start end count key))
     (multiple-value-bind (vars vals stores store-form access-form)
-                         (cltl1:get-setf-method loc)
+                         (get-setf-method loc)
       `(let* (,@(mapcar #'list vars vals)
                 (,(car stores) (delete ,item ,access-form ,@l)))
          ,store-form))))
