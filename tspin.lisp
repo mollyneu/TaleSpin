@@ -730,7 +730,7 @@
 		     )
 	  ;;this will work for now
 	  (dolist (each-person 
-		   (cons 'officer1	;Added [cox 18aug93]
+		   (cons 'officer-roberts	;Added [cox 18aug93]
 			 *personae*))
 	    (now-knows each-person each-item nil)))
         (conseqs each-item))

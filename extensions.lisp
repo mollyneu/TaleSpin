@@ -1143,9 +1143,9 @@
 			(Full program parameter control)
 			)))
 	(0 (force-event '(k-9-squad-arrive
-			   officer1 police-dog1)))
+			   officer-roberts police-dog1)))
 	(1 (force-event '(police-arrive
-			   officer1)))
+			   officer-roberts)))
 	(2 (setf person-num 4)(setf problem-num 3)
 	   (setf *force-ball-throwing* t))
 	(3 (setf person-num 2)(setf problem-num 2)

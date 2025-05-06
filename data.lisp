@@ -119,8 +119,8 @@
      (is-a pipe illegal-item)			;In our sense of the word pipe.
      (is-a dog1 dog)
      (is-a police-dog1 dog)
-     (is-a officer1 police) (is-a police adult)
-     (gender officer1 male)
+     (is-a officer-roberts police) (is-a police adult)
+     (gender officer-roberts male)
      (is-a lighter1 lighter)
      (is-a smoke1 smoke)
      (is-a air1 air)
@@ -192,8 +192,8 @@
      (component elvis hand1)
      (is-a hand1 hand)
      (component-of hand1 elvis)
-     (component officer1 hand2)
-     (component-of hand2 officer1)
+     (component officer-roberts hand2)
+     (component-of hand2 officer-roberts)
      (is-a hand2 hand)
 
      (component orange1 orange-peel1)
@@ -442,8 +442,8 @@
 ;;; [cox 1&7aug93]
 ;;;
 (defparameter *world-facts*
-  '((relation officer1 elvis like pos)
-    (relation elvis officer1 like pos)
+  '((relation officer-roberts elvis like pos)
+    (relation elvis officer-roberts like pos)
     (relation lynn elvis like pos)		; [cox 4jun95]
     (relation elvis lynn like pos)		; [cox 4jun95]
     (relation lynn elvis trust pos)		; [cox 4jun95]
@@ -501,8 +501,8 @@
 ;   (propel sheryl door-bell-switch1 nil nil (pos))
    (call-on-phone)
 ;   (dog-barks dog1)
-   (police-arrive officer1)		;[cox 8aug93]
-   (k-9-squad-arrive officer1 police-dog1) ;[cox 25aug93]
+   (police-arrive officer-roberts)		;[cox 8aug93]
+   (k-9-squad-arrive officer-roberts police-dog1) ;[cox 25aug93]
    ))
 
 
@@ -511,8 +511,8 @@
 ;;; are removed so that only one per story will occur. [cox 27aug93]
 ;;;
 (defparameter *random-police-events*
-	      '((police-arrive officer1)
-		(k-9-squad-arrive officer1 police-dog1)))
+	      '((police-arrive officer-roberts)
+		(k-9-squad-arrive officer-roberts police-dog1)))
 
 
 ;;; -----------------
@@ -605,9 +605,9 @@
 	(remove 'outside1 (append '(police) *all-locations* objects)))
   ;; Remove any old knowledge from previous stories. [cox 5aug93]
   (dolist (x (cons 'world
-		   ;; Added officer1 because he had goals that must not persist
+		   ;; Added officer-roberts because he had goals that must not persist
 		   ;; after a story for goal-eval to work right. [cox 11aug93]
-		   (cons 'officer1 
+		   (cons 'officer-roberts 
 			 *personae*)))
     (setf (get x 'facts) nil
 	  (get x 'goals) nil

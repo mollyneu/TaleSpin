@@ -264,7 +264,7 @@
 
   ;;; TO-DO: fix grammar now that dashes and numbers are removed, add that before components and objects?
 
-  (let* ((x (if (or (find x *objects*) (find x *all-locations*) (equal 'officer1 x))
+  (let* ((x (if (or (find x *objects*) (find x *all-locations*) (equal 'officer-roberts x))
 		(remove-dashes (remove-numbers x))
 	        x))
          (x (if (find x *components*)
@@ -708,7 +708,7 @@
 	 (SUBCLAUSE 'THAT $(CON)  *DEFAULT-TENSE*))))
 
 ;;; |||||| Need to look at this closer. [cox 12aug93]
-;Officer1 asked him whether he'd give officer1 the ganja1.  
+;Officer-roberts asked him whether he'd give officer-roberts the ganja1.  
 (dsp achieve
   (flet ((alpha ()
                 (case (old-cd-head $(OBJECT) )

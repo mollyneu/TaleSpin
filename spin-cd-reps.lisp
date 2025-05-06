@@ -61,7 +61,7 @@
 		    (cond
 		      (*force-original-demo*
 		       (force-event '(k-9-squad-arrive
-				       officer1 police-dog1))
+				       officer-roberts police-dog1))
 		       (setf *sniff-success* 100)
 		       (dcont actor 'lighter1))
 		      (t
@@ -97,7 +97,7 @@
 		    (cond
 		      (*force-original-demo*
 		       (force-event '(k-9-squad-arrive
-				       officer1 police-dog1))
+				       officer-roberts police-dog1))
 		       (setf *sniff-success* 100)
 		       (dcont actor 'lighter1))
 		      (t
@@ -552,7 +552,7 @@
                                    AGENT 
                                    (MTRANS AGENT INFO ACTOR AGENT)
                                    GOAL))))
-              (remove actor *personae*))))) ;;||||||Officer1 not in here? [cox 17aug93]
+              (remove actor *personae*))))) ;;||||||Officer-roberts not in here? [cox 17aug93]
                 
 
 (defun dprox (actor object to-loc)
@@ -563,9 +563,9 @@
                (LIST
                    (make-plan `(dprox ,actor ,object to ,to-loc 2)
                               (AND (NOT (eq ACTOR OBJECT))
-				   ;;|||||| Officer1 need to be in here? [cox 17aug93]
+				   ;;|||||| Officer-roberts need to be in here? [cox 17aug93]
                                    (MEMber OBJECT 
-					   (cons 'officer1 ;Sure [cox 17aug93]
+					   (cons 'officer-roberts ;Sure [cox 17aug93]
 						 *PERSONAE*) )
 				   ;; Persuade someone to do it for you. [cox 17aug93]
                                    (PERSUADE ACTOR 
@@ -682,7 +682,7 @@
                  (make-plan `(tell ,actor ,agent ,info)
                    (AND (DPROX ACTOR ACTOR AGENT)
 			;;Added to make sure that Dprox works. [cox 18aug93]
-			;; |||||| But after the changes allowing officer1 knowledge,
+			;; |||||| But after the changes allowing officer-roberts knowledge,
 			;; is this necessary? 
 			(is-prox? actor (loc-name-of agent))
                         (DOIT action)))))))
@@ -1092,7 +1092,7 @@
 	(ADD-CONSEQ (negate (HAS $(FROM)  $(OBJECT) )))
 	(ADD-CONSEQ (negate (is-at $(OBJECT)  $(FROM) ))))
   (if (and (eq 'ganja1 $(OBJECT) )	;Too specific, but ... [cox 13aug93]
-	   (eq 'officer1 $(TO) ))
+	   (eq 'officer-roberts $(TO) ))
       (add-conseq (state $(TO)  'concerned 'neg)))
   )
 
@@ -1649,7 +1649,7 @@
     ;; |||||| What emotion causes an officer to bust someone? [cox 9aug93]
     ;; Dissatisfaction is better than boredom. [cox 13aug93]
     ;; Changed dissatisfaction to concerned. [cox 17aug93]
-    (if (eq actor 'officer1) 
+    (if (eq actor 'officer-roberts) 
 	(add-plan			
 	 (make-plan 'reaction (s-bust actor 'elvis))))))
 
@@ -1659,7 +1659,7 @@
     ;; Dissatisfaction is better than boredom. [cox 13aug93]
     ;; Changed dissatisfaction to concerned. [cox 17aug93]
     (break)
-    (if (and (eq actor 'officer1)
+    (if (and (eq actor 'officer-roberts)
 	     (eq $(CON VAL) 'cont))
 	(add-plan			
 	 (make-plan 'reaction (s-bust actor 'elvis))))))
@@ -1668,7 +1668,7 @@
 ;;;
 (def-reaction bored
   (let ((actor $(CON ACTOR) ))
-    (if (eq actor 'officer1) ;;; |||||| What emotion causes an officer to bust someone? [cox 9aug93]
+    (if (eq actor 'officer-roberts) ;;; |||||| What emotion causes an officer to bust someone? [cox 9aug93]
 	(add-plan			;; [cox 10aug93]
 	 (make-plan 'reaction (s-bust actor 'elvis)))
       (add-plan				;; [cox 10aug93]
