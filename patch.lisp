@@ -36,12 +36,12 @@
                  (mapcar #'(lambda (p) 
                              (list (string-capitalize (string p))
                                    (string-capitalize (string (get p 'is-a)))))
-                         (cons 'officer1	;So can test his behavior directly [cox 17aug93]
+                         (cons 'officer-roberts	;So can test his behavior directly [cox 17aug93]
 			       *personae*
 			       )
 			 ))))
          (main-character (nth main-character-index 
-			      (cons 'officer1	;[cox 17aug93]
+			      (cons 'officer-roberts	;[cox 17aug93]
 				    *personae*)))
          (g (get main-character 'gender)))
     (setq *main-char* main-character)
@@ -57,7 +57,7 @@
 	  (eq *main-char* 'elvis))
       (push 'jonesing *goals*))			;[cox]
 ;;;     (setf *goals* (append *goals* (list 'sad)))
-    (when (eq *main-char* 'officer1)
+    (when (eq *main-char* 'officer-roberts)
       (setf  *goals* '(concerned)))		;[cox 17aug93 added concerned & 5jun95 limited to concerned]
     (if 
       (and (not (numberp problem-num))		;[cox 18aug93]
