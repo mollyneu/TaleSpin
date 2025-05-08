@@ -584,6 +584,7 @@
   (setf *personae* '(Lynn Karen Mom Dad Elvis)) 
   (dolist (p *personae*)
     (setf (get p 'proper-name) t))
+  (setf (get 'officer-roberts 'proper-name) t)
   (setf *goals* 
 	'(hungry 
 	   thirsty
