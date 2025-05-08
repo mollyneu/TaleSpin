@@ -278,7 +278,6 @@
            (format? *tspin-stream* "~<~% ~4,72:;~:(~A~)~>" x))
 ;;;           (format? say-stream "~<~% ~4,72:;~A~>" x))	
           ((or (get x 'proper-name)
-               (equal x 'officer-roberts)
                (member x *first-person-singular-words*))
            (format? *tspin-stream* "~<~%~4,72:; ~:(~A~)~>" x))
 ;;;           (format? say-stream "~<~%~4,72:; ~A~>" x))

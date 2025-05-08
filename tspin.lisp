@@ -480,7 +480,6 @@
 
 (defun pick-one (l)
   (do-break  pick-one )
-    ;(format t "~A~%" l)
   (let ((len (length l)))
     (if *auto?*
        (random len)

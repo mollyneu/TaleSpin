@@ -168,7 +168,7 @@
 (defun past-participle (infinitive)
   (or (get infinitive 'past-participle)
       (setf (get infinitive 'past-participle)
-            (intern (format nil "~A[E~;~]D"
+            (intern (format nil "~A~:[E~;~]D"
                             infinitive
                             (let ((a (symbol-name infinitive)))
                               (char= (char a (1- (length a))) #\E)))))))
