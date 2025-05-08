@@ -29,7 +29,8 @@
 
 (defun test-get-facts-hash-table (object)
   (let ((fht (get-facts-hash-table)))
-    (format t "~A" (gethash object fht))))
+    ;(format t "~A" (gethash object fht))))
+	(gethash object fht)))
 
 
 (defun list-of-attribute-values-to-name (lst)

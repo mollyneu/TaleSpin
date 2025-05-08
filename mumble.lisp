@@ -269,7 +269,7 @@
   (let* ((original-x x)
         (object-adjectives 
           (when (find x *objects*)
-          (remove-if (lambda (x) (equal (car x) 'is-a)) (test-get-facts-hash-table x))))
+          (remove-if (lambda (x) (or (equal (car x) 'is-a) (equal (car x) 'temperture) (equal (car x) 'component) )) (test-get-facts-hash-table x))))
          (x (if (or (find x *objects*) (find x *all-locations*))
 		        (remove-dashes (remove-numbers x))
   ;; (let* ((x (if (or (find x *objects*) (find x *all-locations*))
@@ -282,7 +282,9 @@
     ; Random number generator - only outputs a certain percentage of the time
     
       (when object-adjectives 
-        (format *tspin-stream* "~a" object-adjectives))
+        ;(format *tspin-stream* "~a" (map 'list (lambda (x) (second x)) object-adjectives)))
+         (format *tspin-stream* " ~{~A~^, ~}" (map 'list (lambda (x) (string-downcase (second x))) object-adjectives)))
+        
 
     (cond ((equal x 'officer-roberts) 
             (format *tspin-stream* "~<~%~4,72:; ~A~>" (string-capitalize (string (remove-dashes x)))))
