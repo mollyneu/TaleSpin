@@ -49,7 +49,7 @@
       "mumble" 
       "verbs"
       "alt-story"
-      "object-naming"
+      "object-facts"
       )
   )
 

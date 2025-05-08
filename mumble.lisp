@@ -250,6 +250,8 @@
 		   (equal c #\8)
 		   (equal c #\9)))
 	     (string with-numbers))))
+       ; if with-numbers is a *object* add description, else don't
+    ;;(intern (format? nil "~a ~a" (car (car (test-get-facts-hash-table 'with-numbers)))) without-numbers))))   
     (intern (format? nil "~a" without-numbers))))
 
 (defun remove-dashes (with-dashes)
@@ -264,12 +266,23 @@
 
   ;;; TO-DO: fix grammar now that dashes and numbers are removed, add that before components and objects?
 
-  (let* ((x (if (or (find x *objects*) (find x *all-locations*))
-		(remove-dashes (remove-numbers x))
+  (let* ((original-x x)
+        (object-adjectives 
+          (when (find x *objects*)
+          (remove-if (lambda (x) (equal (car x) 'is-a)) (test-get-facts-hash-table x))))
+         (x (if (or (find x *objects*) (find x *all-locations*))
+		        (remove-dashes (remove-numbers x))
+  ;; (let* ((x (if (or (find x *objects*) (find x *all-locations*))
+	;;	  (remove-dashes (remove-numbers x))
 	        x))
          (x (if (find x *components*)
                 (intern (format? nil "the ~a" (remove-dashes (remove-numbers x))))
                 x)))
+    ;;(format t "~a" (test-get-facts-hash-table original-x))
+    ; Random number generator - only outputs a certain percentage of the time
+    
+      (when object-adjectives 
+        (format *tspin-stream* "~a" object-adjectives))
 
     (cond ((equal x 'officer-roberts) 
             (format *tspin-stream* "~<~%~4,72:; ~A~>" (string-capitalize (string (remove-dashes x)))))
