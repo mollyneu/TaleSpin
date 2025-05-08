@@ -264,22 +264,26 @@
 
   ;;; TO-DO: fix grammar now that dashes and numbers are removed, add that before components and objects?
 
-  (let* ((x (if (or (find x *objects*) (find x *all-locations*) (equal 'officer-roberts x))
+  (let* ((x (if (or (find x *objects*) (find x *all-locations*))
 		(remove-dashes (remove-numbers x))
 	        x))
          (x (if (find x *components*)
                 (intern (format? nil "the ~a" (remove-dashes (remove-numbers x))))
                 x)))
 
-    (cond (*first-word-in-sentence?*
-           (format? *tspin-stream* "~<~% ~4,72:;~@(~A~)~>" x))
+    (cond ((equal x 'officer-roberts) 
+            (format *tspin-stream* "~<~%~4,72:; ~A~>" (string-capitalize (string (remove-dashes x)))))
+          (*first-word-in-sentence?*
+           ;;(format? *tspin-stream* "~<~% ~4,72:;~@(~A~)~>" x))
+           (format? *tspin-stream* "~<~% ~4,72:;~:(~A~)~>" x))
 ;;;           (format? say-stream "~<~% ~4,72:;~A~>" x))	
           ((or (get x 'proper-name)
                (member x *first-person-singular-words*))
-           (format? *tspin-stream* "~<~%~4,72:; ~@(~A~)~>" x))
+           (format? *tspin-stream* "~<~%~4,72:; ~:(~A~)~>" x))
 ;;;           (format? say-stream "~<~%~4,72:; ~A~>" x))
           (t
   	   (format? *tspin-stream* "~<~%~4,72:; ~(~A~)~>" x)
+       ;;(format? *tspin-stream* "~<~%~4,72:; ~:(~A~)~>" x)
 ;;;  	 (format? say-stream "~<~%~4,72:; ~A~>" x)
 	   )))
 

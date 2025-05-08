@@ -487,7 +487,7 @@
 	 (do ((l l (cdr l))
 	      (i 1 (1+ i)))
 	     ((null l))
-	    (format *tspin-stream* "   ~D. ~{~A ~}~%" i (car l)))
+	    (format *tspin-stream* "   ~D. ~{~A ~}~%" i (map 'list #'remove-dashes (car l))))
 	 (format *tspin-stream* "Type 1~@[,~]" (> len 2))
 	 (do ((n 2 (1+ n)))
 	     ((>= n len)
